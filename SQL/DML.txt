@@ -2,6 +2,7 @@
 /* DDL BEFORE DML */
 create table airlines(airline_id number(10) primary key,airline_name varchar2(26),airline_code varchar2(20));
 CREATE TABLE airports(airport_id number(10) primary key,airport_name VARCHAR2(30),airport_code varchar2(20),city VARCHAR2(20),country VARCHAR2(20));
+
 CREATE TABLE flights(fight_id number(10) primary key,airline_id number(10) references airlines(airline_id),source_airport_id number(10) 
     references airports(airport_id),destination_airport_id number(10) references airports(airport_id),
     departure_time timestamp,
@@ -28,4 +29,56 @@ create table payment(payment_id number(10) primary key,booking_id number(10) ref
 -------------------------------------------------------------------------------------------------------------------------------------------------
                                                               INSERT
 -------------------------------------------------------------------------------------------------------------------------------------------------
+insert into airlines values(101,'Air India','AIR319');
+insert into airlines values(102,'Indigo','6E');
+insert into airlines (airline_id,airline_name,airline_code) values (103,'SpiceJet','SG'),(104,'GoAir','G8'),(105,'Vistara','UK'),
+     (106,'AirAsia India','I5'),(107,'Air India Express','IX'),
+    (108,'Alliance Air','9I'),(109,'Star Air','OG')
 
+INSERT ALL
+    INTO airlines (airline_id, airline_name, airline_code) VALUES (103, 'SpiceJet', 'SG')
+    INTO airlines (airline_id, airline_name, airline_code) VALUES (104, 'GoAir', 'G8')
+    INTO airlines (airline_id, airline_name, airline_code) VALUES (105, 'Vistara', 'UK')
+    INTO airlines (airline_id, airline_name, airline_code) VALUES (106, 'AirAsia India', 'I5')
+    INTO airlines (airline_id, airline_name, airline_code) VALUES (107, 'Air India Express', 'IX')
+    INTO airlines (airline_id, airline_name, airline_code) VALUES (108, 'Alliance Air', '9I')
+    INTO airlines (airline_id, airline_name, airline_code) VALUES (109, 'Star Air', 'OG')
+SELECT * FROM dual;
+
+alter table airports modify airport_name varchar2(255);
+insert all
+    into airports (airport_id,airport_name,airport_code,city,country) 
+    values (102,'Ahmedabad Airport','AMD','Ahmedabad','India')
+    into airports (airport_id,airport_name,airport_code,city,country) 
+    values (103,'Aizawl Airport','AJL','Aizawl','India')
+    into airports (airport_id,airport_name,airport_code,city,country) 
+    values (104,'Akola Airport','AKD','Akola','India')
+    into airports (airport_id,airport_name,airport_code,city,country) 
+    values (105,'Along Airport','IXV','Along','India')
+    into airports (airport_id,airport_name,airport_code,city,country) 
+    values (106,'Amausi Airport','LKO','Lucknow','India')
+    into airports (airport_id,airport_name,airport_code,city,country) 
+    values (107,'Amritsar Airport','LUH','Ludhiana','India')
+select 1 from dual;
+
+select *from airlines order by airline_name asc;
+
+-------------------------------------------------------------------------------------------------------------
+                                        UPDATE
+-------------------------------------------------------------------------------------------------------------
+[UPDATE] [SCHEMA].[tableName] [SET] col1=?,col2=? .. [WHERE] <CONDITION1> (AND/OR) <CONDITION2>....;
+ update airlines set airline_code ='AI' where airline_id = 101;
+ update airlines set airline_code ='AirI',airline_name='airIndia' where airline_id = 101;
+ update airlines set airline_name='AirIndia' where airline_id = 101 and airline_code ='AirI';
+ update airlines set airline_code ='AI' where airline_id = 101;
+
+--------------------------------------------------------------------------------------------------------------
+                                        DELETE 
+--------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+ 
