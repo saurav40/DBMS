@@ -75,7 +75,12 @@ select *from airlines order by airline_name asc;
 --------------------------------------------------------------------------------------------------------------
                                         DELETE 
 --------------------------------------------------------------------------------------------------------------
+DELETE FROM table_name
+WHERE condition;
 
+Delete from airlines where airline_name like 'Indigo';
+Delete from airlines where airline_id = 106;
+Delete from airports;
 
 
 
