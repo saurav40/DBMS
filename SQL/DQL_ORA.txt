@@ -1,0 +1,39 @@
+--DQL(Data Query Language-Select)
+select *from hr.departments;
+create table newDepartments as select *from hr.departments where department_id >=10 and department_id <50;
+select *from(select *from hr.departments union all 
+select *from newDepartments) fetch first 10 rows only;
+
+
+SELECT *
+FROM (
+  SELECT dep.*, ROWNUM AS rn
+  FROM newDepartments dep
+)
+WHERE rn >= 5 AND rn <= 9;
+SELECT *
+FROM hr.employees
+FETCH FIRST 3 ROWS ONLY;
+
+--write a query to display records from 5 to 9;
+select *from hr.departments fetch first 10 rows only;
+
+select *from (select *from (select *from hr.departments order by department_id fetch first 9 rows only) order by department_id desc) 
+    order by department_id desc fetch first 4 rows only;
+
+--write a query to display firstname,lastname of those employee who is receiving higher salary than the employee id =163
+
+select e.first_name,e.last_name,e.salary from hr.employees e where e.salary >(select salary from hr.employees where
+    employee_id = 163);
+
+--write a SQL query to find out which employees have the same designation as the employee whose ID is 169. Return first name, last name, department ID and job ID
+
+select e.first_name,e.last_name from hr.employees e 
+     where e.job_id =(select job_id from hr.employees where employee_id = 169);
+
+--Aggregate functions :
+  count(*)
+  sum(column)
+  min(column)
+  max(column)
+  avg(column)
