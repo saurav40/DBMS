@@ -1,0 +1,72 @@
+--DCL (Data Control Language-Grant,Revoke) 
+ Use the GRANT statement to give privileges to a specific user or role, or to all users,to perform actions on database objects.
+ You can also use the GRANT statement to grant a role to a user, to PUBLIC, or to another role.
+
+The following types of privileges can be granted:
+      Delete data from a specific table.
+      Insert data into a specific table.
+      Create a foreign key reference to the named table or to a subset of columns from a table.
+      Select data from a table, view, or a subset of columns in a table.
+      Create a trigger on a table.
+      Update data in a table or in a subset of columns in a table.
+      Run a specified function or procedure.
+      Use a sequence generator or a user-defined type.
+
+--Syntax for tables--
+   GRANT privilege-type ON [TABLE] { table-Name | view-Name } TO grantees
+   eg.- Grant select on table users to saurabh;
+        Grant create on table products to saurabh;
+        Grant update,trigger on table incidents to saurabh,Satish;
+
+--Syntax for routines--
+    GRANT EXECUTE ON { FUNCTION | PROCEDURE } routine-designator TO grantees
+    eg:- Grant execute on Procedure p to maria;
+
+--Syntax for roles--
+   GRANT roleName [ {, roleName }* ] TO grantees
+   eg:- GRANT admin_role, manager_role TO user1, user2;
+
+--Syntax for sequence generators--
+  GRANT USAGE ON SEQUENCE [ schemaName. ] SQL92Identifier TO grantees
+  eg:- grant usage on sequence seq1 to saurabh;
+
+--Syntax for user-defined types
+  GRANT USAGE ON TYPE [ schemaName. ] SQL92Identifier TO grantees
+  eg:- GRANT USAGE ON TYPE price TO finance_role;
+
+
+---*************REVOKE*************---
+Use the REVOKE statement to remove privileges from a specific user or role, or from all users, to perform actions on database objects.
+You can also use the REVOKE statement to revoke a role from a user, from PUBLIC, or from another role.
+
+ The following types of privileges can be revoked:
+        Delete data from a specific table.
+        Insert data into a specific table.
+        Create a foreign key reference to the named table or to a subset of columns from a table.
+        Select data from a table, view, or a subset of columns in a table.
+        Create a trigger on a table.
+        Update data in a table or in a subset of columns in a table.
+        Run a specified routine (function or procedure).
+        Use a sequence generator or a user-defined type.
+     
+--Syntax for tables--
+    REVOKE privilege-type ON [ TABLE ] { table-Name | view-Name } FROM grantees
+    eg:- Revoke select on table users from saurabh;
+         Revoke create on table products from saurabh;
+         Revoke update,trigger on table incidents from saurabh,Satish;
+
+--Syntax for routines
+    REVOKE EXECUTE ON { FUNCTION | PROCEDURE } routine-designator FROM grantees  RESTRICT
+    eg:- revoke execute on Procedure p from maria restrict;
+
+--Syntax for roles
+    REVOKE roleName [ {, roleName }* ] FROM grantees;
+    eg:- revoke dmin_role, manager_role from user1, user2;
+
+--Syntax for sequence generators
+   REVOKE USAGE ON SEQUENCE [ schemaName. ] SQL92Identifier FROM grantees RESTRICT
+   eg:- revoke usage on sequence myseq1 from saurabh restrict;
+
+--Syntax for user-defined types
+   REVOKE USAGE ON TYPE  [ schemaName. ] SQL92Identifier FROM grantees RESTRICT
+   eg:- revoke usage on type hr.price to user_role;
