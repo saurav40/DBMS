@@ -1,0 +1,75 @@
+---TCL(Transaction Control Language-commit,rollback,savepoint)
+--https://dotnettutorials.net/lesson/transaction-control-language-in-oracle/
+    
+create table products(id number(6) primary key,name varchar2(30),type varchar2(34));
+
+insert all 
+     into products(id,name,type) values(1,'soap','grocery')
+     into products(id,name,type) values(2,'shempoo','grocery')
+select 1 from dual;
+---In Sql plus*---------
+create table products1(id number(3) primary key,name varchar2(30),type varchar2(30));
+
+insert all
+  2   into products1(id,name,type) values(1,'soap','grocery')
+  3   into products1(id,name,type) values(2,'coffee','grocery')
+  4   select 1 from dual;
+
+select *from products1;
+
+        ID NAME                           TYPE
+---------- ------------------------------ ------------------------------
+         1 soap                           grocery
+         2 coffee                         grocery
+         3 sugar                          grocery
+
+commit;
+
+Commit complete.
+
+update products1 set name='sweets' where id=3;
+1 row updated.
+    
+SQL> select *from products1;
+
+        ID NAME                           TYPE
+---------- ------------------------------ ------------------------------
+         1 soap                           grocery
+         2 coffee                         grocery
+         3 sweets                         grocery
+
+ rollback;
+
+Rollback complete.
+
+SQL> select *from products1;
+
+        ID NAME                           TYPE
+---------- ------------------------------ ------------------------------
+         1 soap                           grocery
+         2 coffee                         grocery
+         3 sugar                          grocery
+
+ delete from products1 where id=3;
+
+1 row deleted.
+
+SQL> select *from products1;
+
+        ID NAME                           TYPE
+---------- ------------------------------ ------------------------------
+         1 soap                           grocery
+         2 coffee                         grocery
+
+SQL>  rollback;
+
+Rollback complete.
+
+
+SQL> select *from products1;
+
+        ID NAME                           TYPE
+---------- ------------------------------ ------------------------------
+         1 soap                           grocery
+         2 coffee                         grocery
+         3 sugar                          grocery
